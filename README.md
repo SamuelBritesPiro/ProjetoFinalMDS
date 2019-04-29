@@ -11,7 +11,7 @@ O **Projeto Final** tem o objetivo de mostrar:
 
 Este projeto foi realizado em conjunto com a disciplina **Desenvolvimento de Aplicações** para o trabalho **RealStand** que é um gestor de um *stand* de automóveis e foi realizado com a linguaem de programação C#.
 
-## Alunos
+ Alunos
 * Rodrigo Costa Fernandes nº2180632
 * Samuel Pires Brito nº2180657
 
