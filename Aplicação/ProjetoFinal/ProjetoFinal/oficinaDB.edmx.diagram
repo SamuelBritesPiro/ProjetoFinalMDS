@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5a4dc979a87d4120bf410761bcbfb43f" Name="Diagram1" ZoomLevel="97" >
+        <EntityTypeShape EntityType="oficinaDB.Cliente" Width="1.5" PointX="0.875" PointY="4.875" />
+        <EntityTypeShape EntityType="oficinaDB.Venda" Width="1.5" PointX="5" PointY="5.125" />
+        <EntityTypeShape EntityType="oficinaDB.Parcela" Width="1.5" PointX="3.875" PointY="2.75" />
+        <EntityTypeShape EntityType="oficinaDB.Servico" Width="1.75" PointX="7.5" PointY="2.75" />
+        <EntityTypeShape EntityType="oficinaDB.Carro" Width="1.5" PointX="12.125" PointY="5.125" />
+        <EntityTypeShape EntityType="oficinaDB.CarroOficina" Width="1.5" PointX="12" PointY="1.625" />
+        <InheritanceConnector EntityType="oficinaDB.CarroOficina" />
+        <EntityTypeShape EntityType="oficinaDB.CarroVenda" Width="1.5" PointX="9.5" PointY="5.375" />
+        <InheritanceConnector EntityType="oficinaDB.CarroVenda" />
+        <EntityTypeShape EntityType="oficinaDB.CarroAluguer" Width="1.5" PointX="12.125" PointY="8" />
+        <InheritanceConnector EntityType="oficinaDB.CarroAluguer" />
+        <EntityTypeShape EntityType="oficinaDB.Aluguer" Width="1.875" PointX="7.625" PointY="8.5" />
+        <AssociationConnector Association="oficinaDB.ClienteCarroOficina" />
+        <AssociationConnector Association="oficinaDB.ClienteVenda" />
+        <AssociationConnector Association="oficinaDB.ClienteAluguer" />
+        <AssociationConnector Association="oficinaDB.CarroOficinaServico" />
+        <AssociationConnector Association="oficinaDB.ServicoParcela" />
+        <AssociationConnector Association="oficinaDB.CarroVendaVenda" />
+        <AssociationConnector Association="oficinaDB.CarroAluguerAluguer" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
