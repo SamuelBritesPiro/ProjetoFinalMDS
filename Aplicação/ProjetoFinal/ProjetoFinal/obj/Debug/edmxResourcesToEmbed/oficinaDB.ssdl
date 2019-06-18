@@ -8,8 +8,8 @@
     <EntitySet Name="Carros" EntityType="oficinaDB.Store.Carros" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Alugueres" EntityType="oficinaDB.Store.Alugueres" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Carros_CarroOficina" EntityType="oficinaDB.Store.Carros_CarroOficina" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Carros_CarroVenda" EntityType="oficinaDB.Store.Carros_CarroVenda" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Carros_CarroAluguer" EntityType="oficinaDB.Store.Carros_CarroAluguer" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Carros_CarroVenda" EntityType="oficinaDB.Store.Carros_CarroVenda" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="ClienteCarroOficina" Association="oficinaDB.Store.ClienteCarroOficina">
       <End Role="Cliente" EntitySet="Clientes" />
       <End Role="CarroOficina" EntitySet="Carros_CarroOficina" />
@@ -30,25 +30,25 @@
       <End Role="Servico" EntitySet="Servicos" />
       <End Role="Parcela" EntitySet="Parcelas" />
     </AssociationSet>
-    <AssociationSet Name="CarroVendaVenda" Association="oficinaDB.Store.CarroVendaVenda">
-      <End Role="CarroVenda" EntitySet="Carros_CarroVenda" />
-      <End Role="Venda" EntitySet="Vendas" />
-    </AssociationSet>
     <AssociationSet Name="CarroAluguerAluguer" Association="oficinaDB.Store.CarroAluguerAluguer">
       <End Role="CarroAluguer" EntitySet="Carros_CarroAluguer" />
       <End Role="Aluguer" EntitySet="Alugueres" />
+    </AssociationSet>
+    <AssociationSet Name="VendaCarroVenda" Association="oficinaDB.Store.VendaCarroVenda">
+      <End Role="Venda" EntitySet="Vendas" />
+      <End Role="CarroVenda" EntitySet="Carros_CarroVenda" />
     </AssociationSet>
     <AssociationSet Name="FK_CarroOficina_inherits_Carro" Association="oficinaDB.Store.FK_CarroOficina_inherits_Carro">
       <End Role="Carro" EntitySet="Carros" />
       <End Role="CarroOficina" EntitySet="Carros_CarroOficina" />
     </AssociationSet>
-    <AssociationSet Name="FK_CarroVenda_inherits_Carro" Association="oficinaDB.Store.FK_CarroVenda_inherits_Carro">
-      <End Role="Carro" EntitySet="Carros" />
-      <End Role="CarroVenda" EntitySet="Carros_CarroVenda" />
-    </AssociationSet>
     <AssociationSet Name="FK_CarroAluguer_inherits_Carro" Association="oficinaDB.Store.FK_CarroAluguer_inherits_Carro">
       <End Role="Carro" EntitySet="Carros" />
       <End Role="CarroAluguer" EntitySet="Carros_CarroAluguer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarroVenda_inherits_Carro" Association="oficinaDB.Store.FK_CarroVenda_inherits_Carro">
+      <End Role="Carro" EntitySet="Carros" />
+      <End Role="CarroVenda" EntitySet="Carros_CarroVenda" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Clientes">
@@ -121,14 +121,6 @@
     <Property Name="ClienteIdCliente" Type="int" Nullable="false" />
     <Property Name="IdCarro" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="Carros_CarroVenda">
-    <Key>
-      <PropertyRef Name="IdCarro" />
-    </Key>
-    <Property Name="Extras" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="IdCarro" Type="int" Nullable="false" />
-    <Property Name="Venda_IdVenda" Type="int" Nullable="false" />
-  </EntityType>
   <EntityType Name="Carros_CarroAluguer">
     <Key>
       <PropertyRef Name="IdCarro" />
@@ -136,6 +128,14 @@
     <Property Name="Estado" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Matricula" Type="nvarchar(max)" Nullable="false" />
     <Property Name="IdCarro" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Carros_CarroVenda">
+    <Key>
+      <PropertyRef Name="IdCarro" />
+    </Key>
+    <Property Name="Extras" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IdCarro" Type="int" Nullable="false" />
+    <Property Name="Venda_IdVenda" Type="int" Nullable="true" />
   </EntityType>
   <Association Name="ClienteCarroOficina">
     <End Role="Cliente" Type="oficinaDB.Store.Clientes" Multiplicity="1" />
@@ -197,18 +197,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="CarroVendaVenda">
-    <End Role="CarroVenda" Type="oficinaDB.Store.Carros_CarroVenda" Multiplicity="*" />
-    <End Role="Venda" Type="oficinaDB.Store.Vendas" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="Venda">
-        <PropertyRef Name="IdVenda" />
-      </Principal>
-      <Dependent Role="CarroVenda">
-        <PropertyRef Name="Venda_IdVenda" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="CarroAluguerAluguer">
     <End Role="CarroAluguer" Type="oficinaDB.Store.Carros_CarroAluguer" Multiplicity="1" />
     <End Role="Aluguer" Type="oficinaDB.Store.Alugueres" Multiplicity="*" />
@@ -218,6 +206,18 @@
       </Principal>
       <Dependent Role="Aluguer">
         <PropertyRef Name="CarroAluguerIdCarro" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="VendaCarroVenda">
+    <End Role="Venda" Type="oficinaDB.Store.Vendas" Multiplicity="0..1" />
+    <End Role="CarroVenda" Type="oficinaDB.Store.Carros_CarroVenda" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Venda">
+        <PropertyRef Name="IdVenda" />
+      </Principal>
+      <Dependent Role="CarroVenda">
+        <PropertyRef Name="Venda_IdVenda" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -235,20 +235,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_CarroVenda_inherits_Carro">
-    <End Role="Carro" Type="oficinaDB.Store.Carros" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="CarroVenda" Type="oficinaDB.Store.Carros_CarroVenda" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Carro">
-        <PropertyRef Name="IdCarro" />
-      </Principal>
-      <Dependent Role="CarroVenda">
-        <PropertyRef Name="IdCarro" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_CarroAluguer_inherits_Carro">
     <End Role="Carro" Type="oficinaDB.Store.Carros" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -259,6 +245,20 @@
         <PropertyRef Name="IdCarro" />
       </Principal>
       <Dependent Role="CarroAluguer">
+        <PropertyRef Name="IdCarro" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarroVenda_inherits_Carro">
+    <End Role="Carro" Type="oficinaDB.Store.Carros" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="CarroVenda" Type="oficinaDB.Store.Carros_CarroVenda" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Carro">
+        <PropertyRef Name="IdCarro" />
+      </Principal>
+      <Dependent Role="CarroVenda">
         <PropertyRef Name="IdCarro" />
       </Dependent>
     </ReferentialConstraint>

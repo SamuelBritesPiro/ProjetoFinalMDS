@@ -27,13 +27,13 @@
       <End Role="Servico" EntitySet="Servicos" />
       <End Role="Parcela" EntitySet="Parcelas" />
     </AssociationSet>
-    <AssociationSet Name="CarroVendaVenda" Association="oficinaDB.CarroVendaVenda">
-      <End Role="CarroVenda" EntitySet="Carros" />
-      <End Role="Venda" EntitySet="Vendas" />
-    </AssociationSet>
     <AssociationSet Name="CarroAluguerAluguer" Association="oficinaDB.CarroAluguerAluguer">
-      <End Role="CarroAluguer" EntitySet="Carros" />
-      <End Role="Aluguer" EntitySet="Alugueres" />
+      <End EntitySet="Carros" Role="CarroAluguer" />
+      <End EntitySet="Alugueres" Role="Aluguer" />
+    </AssociationSet>
+    <AssociationSet Name="VendaCarroVenda" Association="oficinaDB.VendaCarroVenda">
+      <End Role="Venda" EntitySet="Vendas" />
+      <End Role="CarroVenda" EntitySet="Carros" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Cliente">
@@ -59,7 +59,7 @@
     <Property Name="Data" Type="DateTime" Nullable="false" />
     <NavigationProperty Name="Cliente" Relationship="oficinaDB.ClienteVenda" FromRole="Venda" ToRole="Cliente" />
     <Property Name="ClienteIdCliente" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="CarroVenda" Relationship="oficinaDB.CarroVendaVenda" FromRole="Venda" ToRole="CarroVenda" />
+    <NavigationProperty Name="CarroVenda" Relationship="oficinaDB.VendaCarroVenda" FromRole="Venda" ToRole="CarroVenda" />
   </EntityType>
   <EntityType Name="Parcela">
     <Key>
@@ -102,7 +102,7 @@
   </EntityType>
   <EntityType Name="CarroVenda" BaseType="oficinaDB.Carro">
     <Property Name="Extras" Type="String" Nullable="false" />
-    <NavigationProperty Name="Venda" Relationship="oficinaDB.CarroVendaVenda" FromRole="CarroVenda" ToRole="Venda" />
+    <NavigationProperty Name="Venda" Relationship="oficinaDB.VendaCarroVenda" FromRole="CarroVenda" ToRole="Venda" />
   </EntityType>
   <EntityType Name="CarroAluguer" BaseType="oficinaDB.Carro">
     <Property Name="Estado" Type="String" Nullable="false" />
@@ -121,7 +121,7 @@
     <NavigationProperty Name="Cliente" Relationship="oficinaDB.ClienteAluguer" FromRole="Aluguer" ToRole="Cliente" />
     <Property Name="ClienteIdCliente" Type="Int32" Nullable="false" />
     <NavigationProperty Name="CarroAluguer" Relationship="oficinaDB.CarroAluguerAluguer" FromRole="Aluguer" ToRole="CarroAluguer" />
-    <Property Name="CarroAluguerIdCarro" Type="Int32" Nullable="false" />
+    <Property Name="CarroAluguerIdCarro" Nullable="false" Type="Int32" />
   </EntityType>
   <Association Name="ClienteCarroOficina">
     <End Type="oficinaDB.Cliente" Role="Cliente" Multiplicity="1" />
@@ -183,13 +183,9 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="CarroVendaVenda">
-    <End Type="oficinaDB.CarroVenda" Role="CarroVenda" Multiplicity="1" />
-    <End Type="oficinaDB.Venda" Role="Venda" Multiplicity="1" />
-  </Association>
   <Association Name="CarroAluguerAluguer">
-    <End Type="oficinaDB.CarroAluguer" Role="CarroAluguer" Multiplicity="1" />
-    <End Type="oficinaDB.Aluguer" Role="Aluguer" Multiplicity="*" />
+    <End Type="oficinaDB.CarroAluguer" Multiplicity="1" Role="CarroAluguer" />
+    <End Type="oficinaDB.Aluguer" Multiplicity="*" Role="Aluguer" />
     <ReferentialConstraint>
       <Principal Role="CarroAluguer">
         <PropertyRef Name="IdCarro" />
@@ -198,5 +194,9 @@
         <PropertyRef Name="CarroAluguerIdCarro" />
       </Dependent>
     </ReferentialConstraint>
+  </Association>
+  <Association Name="VendaCarroVenda">
+    <End Type="oficinaDB.Venda" Role="Venda" Multiplicity="0..1" />
+    <End Type="oficinaDB.CarroVenda" Role="CarroVenda" Multiplicity="0..1" />
   </Association>
 </Schema>

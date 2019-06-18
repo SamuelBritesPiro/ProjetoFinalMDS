@@ -22,8 +22,8 @@
         <AssociationConnector Association="oficinaDB.ClienteAluguer" />
         <AssociationConnector Association="oficinaDB.CarroOficinaServico" />
         <AssociationConnector Association="oficinaDB.ServicoParcela" />
-        <AssociationConnector Association="oficinaDB.CarroVendaVenda" />
         <AssociationConnector Association="oficinaDB.CarroAluguerAluguer" />
+        <AssociationConnector Association="oficinaDB.VendaCarroVenda" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

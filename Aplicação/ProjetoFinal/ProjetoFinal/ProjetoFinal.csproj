@@ -11,6 +11,21 @@
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -57,6 +72,24 @@
     <Compile Include="Aluguer.cs">
       <DependentUpon>oficinaDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="AlugueresCarrosGestao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AlugueresCarrosGestao.Designer.cs">
+      <DependentUpon>AlugueresCarrosGestao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AlugueresCarrosAdicionar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AlugueresCarrosAdicionar.Designer.cs">
+      <DependentUpon>AlugueresCarrosAdicionar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AlugueresPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AlugueresPrincipal.Designer.cs">
+      <DependentUpon>AlugueresPrincipal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Carro.cs">
       <DependentUpon>oficinaDB.tt</DependentUpon>
     </Compile>
@@ -81,11 +114,52 @@
     <Compile Include="Cliente.cs">
       <DependentUpon>oficinaDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="ClientesPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="ClientesPrincipal.Designer.cs">
+      <DependentUpon>ClientesPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OficinaCarrosAdicionar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OficinaCarrosAdicionar.Designer.cs">
+      <DependentUpon>OficinaCarrosAdicionar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OficinaCarrosGestao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OficinaCarrosGestao.Designer.cs">
+      <DependentUpon>OficinaCarrosGestao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="oficinadbDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>oficinadbDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="OficinaParcelaAdicionar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OficinaParcelaAdicionar.Designer.cs">
+      <DependentUpon>OficinaParcelaAdicionar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OficinaParcelaGestao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OficinaParcelaGestao.Designer.cs">
+      <DependentUpon>OficinaParcelaGestao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OficinaPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OficinaPrincipal.Designer.cs">
+      <DependentUpon>OficinaPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
     </Compile>
     <Compile Include="oficinaDB.Context.cs">
       <AutoGen>True</AutoGen>
@@ -102,6 +176,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>oficinaDB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="OficinaServicoAdicionar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OficinaServicoAdicionar.Designer.cs">
+      <DependentUpon>OficinaServicoAdicionar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OficinaServicoGestao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OficinaServicoGestao.Designer.cs">
+      <DependentUpon>OficinaServicoGestao.cs</DependentUpon>
+    </Compile>
     <Compile Include="Parcela.cs">
       <DependentUpon>oficinaDB.tt</DependentUpon>
     </Compile>
@@ -113,8 +199,59 @@
     <Compile Include="Venda.cs">
       <DependentUpon>oficinaDB.tt</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="VendasCarrosAdicionar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VendasCarrosAdicionar.Designer.cs">
+      <DependentUpon>VendasCarrosAdicionar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VendasCarrosGestao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VendasCarrosGestao.Designer.cs">
+      <DependentUpon>VendasCarrosGestao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VendasPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VendasPrincipal.Designer.cs">
+      <DependentUpon>VendasPrincipal.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="AlugueresCarrosGestao.resx">
+      <DependentUpon>AlugueresCarrosGestao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AlugueresCarrosAdicionar.resx">
+      <DependentUpon>AlugueresCarrosAdicionar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AlugueresPrincipal.resx">
+      <DependentUpon>AlugueresPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientesPrincipal.resx">
+      <DependentUpon>ClientesPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OficinaCarrosAdicionar.resx">
+      <DependentUpon>OficinaCarrosAdicionar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OficinaCarrosGestao.resx">
+      <DependentUpon>OficinaCarrosGestao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OficinaParcelaAdicionar.resx">
+      <DependentUpon>OficinaParcelaAdicionar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OficinaParcelaGestao.resx">
+      <DependentUpon>OficinaParcelaGestao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OficinaPrincipal.resx">
+      <DependentUpon>OficinaPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OficinaServicoAdicionar.resx">
+      <DependentUpon>OficinaServicoAdicionar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OficinaServicoGestao.resx">
+      <DependentUpon>OficinaServicoGestao.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -125,12 +262,32 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="VendasCarrosAdicionar.resx">
+      <DependentUpon>VendasCarrosAdicionar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VendasCarrosGestao.resx">
+      <DependentUpon>VendasCarrosGestao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VendasPrincipal.resx">
+      <DependentUpon>VendasPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
     <EntityDeploy Include="oficinaDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>oficinaDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <None Include="oficinaDB.edmx.diagram">
       <DependentUpon>oficinaDB.edmx</DependentUpon>
+    </None>
+    <None Include="oficinadbDataSet.xsc">
+      <DependentUpon>oficinadbDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="oficinadbDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>oficinadbDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="oficinadbDataSet.xss">
+      <DependentUpon>oficinadbDataSet.xsd</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -164,6 +321,18 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\DataSources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

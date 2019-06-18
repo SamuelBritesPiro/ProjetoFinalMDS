@@ -10,15 +10,35 @@ namespace ProjetoFinal
     {
         public Cliente(string nome, int nif, string morada, int contacto)
         {
-            Nome = nome ?? throw new ArgumentNullException(nameof(nome));
+            Nome = nome;
             Nif = nif;
-            Morada = morada ?? throw new ArgumentNullException(nameof(morada));
+            Morada = morada;
             Contacto = contacto;
+            CarrosOficina = new HashSet<CarroOficina>();
+            Vendas = new HashSet<Venda>();
+            Alugueres = new HashSet<Aluguer>();
         }
+
 
         public override string ToString()
         {
-            return Nome + " " + Nif + " " + Morada + " " + Contacto;
+            return "[" + Nif + "] - " + Nome + " (" + Contacto + ")"; // + " {" + Morada + "} ";
         }
+
+        public decimal TotalCarrosOficina()
+        {
+            decimal total = 0;
+
+            foreach (CarroOficina carro in CarrosOficina)
+            {
+                total += carro.TotalServicos();
+            }
+
+
+            return total;
+        }
+
+
+
     }
 }

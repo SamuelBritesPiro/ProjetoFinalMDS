@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 04/30/2019 16:32:25
+-- Date Created: 05/21/2019 15:38:32
 -- Generated from EDMX file: C:\Users\2180657\Desktop\ProjetoFinal\ProjetoFinal\oficinaDB.edmx
 -- --------------------------------------------------
 
@@ -97,7 +97,7 @@ GO
 -- Creating table 'Vendas'
 CREATE TABLE [dbo].[Vendas] (
     [IdVenda] int IDENTITY(1,1) NOT NULL,
-    [Valor] decimal(18,0)  NOT NULL,
+    [Valor] decimal(18,2)  NOT NULL,
     [Estado] nvarchar(max)  NOT NULL,
     [Data] datetime  NOT NULL,
     [ClienteIdCliente] int  NOT NULL
@@ -107,7 +107,7 @@ GO
 -- Creating table 'Parcelas'
 CREATE TABLE [dbo].[Parcelas] (
     [IdParcela] int IDENTITY(1,1) NOT NULL,
-    [Valor] decimal(18,0)  NOT NULL,
+    [Valor] decimal(18,2)  NOT NULL,
     [Descricao] nvarchar(max)  NOT NULL,
     [ServicoIdServico] int  NOT NULL
 );
@@ -138,7 +138,7 @@ CREATE TABLE [dbo].[Alugueres] (
     [IdAluguer] int IDENTITY(1,1) NOT NULL,
     [DataInicio] datetime  NOT NULL,
     [DataFim] datetime  NOT NULL,
-    [Valor] decimal(18,0)  NOT NULL,
+    [Valor] decimal(18,2)  NOT NULL,
     [Kms] int  NOT NULL,
     [ClienteIdCliente] int  NOT NULL,
     [CarroAluguerIdCarro] int  NOT NULL
@@ -154,19 +154,19 @@ CREATE TABLE [dbo].[Carros_CarroOficina] (
 );
 GO
 
--- Creating table 'Carros_CarroVenda'
-CREATE TABLE [dbo].[Carros_CarroVenda] (
-    [Extras] nvarchar(max)  NOT NULL,
-    [IdCarro] int  NOT NULL,
-    [Venda_IdVenda] int  NOT NULL
-);
-GO
-
 -- Creating table 'Carros_CarroAluguer'
 CREATE TABLE [dbo].[Carros_CarroAluguer] (
     [Estado] nvarchar(max)  NOT NULL,
     [Matricula] nvarchar(max)  NOT NULL,
     [IdCarro] int  NOT NULL
+);
+GO
+
+-- Creating table 'Carros_CarroVenda'
+CREATE TABLE [dbo].[Carros_CarroVenda] (
+    [Extras] nvarchar(max)  NOT NULL,
+    [IdCarro] int  NOT NULL,
+    [Venda_IdVenda] int  NULL
 );
 GO
 
@@ -216,15 +216,15 @@ ADD CONSTRAINT [PK_Carros_CarroOficina]
     PRIMARY KEY CLUSTERED ([IdCarro] ASC);
 GO
 
--- Creating primary key on [IdCarro] in table 'Carros_CarroVenda'
-ALTER TABLE [dbo].[Carros_CarroVenda]
-ADD CONSTRAINT [PK_Carros_CarroVenda]
-    PRIMARY KEY CLUSTERED ([IdCarro] ASC);
-GO
-
 -- Creating primary key on [IdCarro] in table 'Carros_CarroAluguer'
 ALTER TABLE [dbo].[Carros_CarroAluguer]
 ADD CONSTRAINT [PK_Carros_CarroAluguer]
+    PRIMARY KEY CLUSTERED ([IdCarro] ASC);
+GO
+
+-- Creating primary key on [IdCarro] in table 'Carros_CarroVenda'
+ALTER TABLE [dbo].[Carros_CarroVenda]
+ADD CONSTRAINT [PK_Carros_CarroVenda]
     PRIMARY KEY CLUSTERED ([IdCarro] ASC);
 GO
 
@@ -307,21 +307,6 @@ ON [dbo].[Parcelas]
     ([ServicoIdServico]);
 GO
 
--- Creating foreign key on [Venda_IdVenda] in table 'Carros_CarroVenda'
-ALTER TABLE [dbo].[Carros_CarroVenda]
-ADD CONSTRAINT [FK_CarroVendaVenda]
-    FOREIGN KEY ([Venda_IdVenda])
-    REFERENCES [dbo].[Vendas]
-        ([IdVenda])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_CarroVendaVenda'
-CREATE INDEX [IX_FK_CarroVendaVenda]
-ON [dbo].[Carros_CarroVenda]
-    ([Venda_IdVenda]);
-GO
-
 -- Creating foreign key on [CarroAluguerIdCarro] in table 'Alugueres'
 ALTER TABLE [dbo].[Alugueres]
 ADD CONSTRAINT [FK_CarroAluguerAluguer]
@@ -337,6 +322,21 @@ ON [dbo].[Alugueres]
     ([CarroAluguerIdCarro]);
 GO
 
+-- Creating foreign key on [Venda_IdVenda] in table 'Carros_CarroVenda'
+ALTER TABLE [dbo].[Carros_CarroVenda]
+ADD CONSTRAINT [FK_VendaCarroVenda]
+    FOREIGN KEY ([Venda_IdVenda])
+    REFERENCES [dbo].[Vendas]
+        ([IdVenda])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_VendaCarroVenda'
+CREATE INDEX [IX_FK_VendaCarroVenda]
+ON [dbo].[Carros_CarroVenda]
+    ([Venda_IdVenda]);
+GO
+
 -- Creating foreign key on [IdCarro] in table 'Carros_CarroOficina'
 ALTER TABLE [dbo].[Carros_CarroOficina]
 ADD CONSTRAINT [FK_CarroOficina_inherits_Carro]
@@ -346,18 +346,18 @@ ADD CONSTRAINT [FK_CarroOficina_inherits_Carro]
     ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
 
--- Creating foreign key on [IdCarro] in table 'Carros_CarroVenda'
-ALTER TABLE [dbo].[Carros_CarroVenda]
-ADD CONSTRAINT [FK_CarroVenda_inherits_Carro]
+-- Creating foreign key on [IdCarro] in table 'Carros_CarroAluguer'
+ALTER TABLE [dbo].[Carros_CarroAluguer]
+ADD CONSTRAINT [FK_CarroAluguer_inherits_Carro]
     FOREIGN KEY ([IdCarro])
     REFERENCES [dbo].[Carros]
         ([IdCarro])
     ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
 
--- Creating foreign key on [IdCarro] in table 'Carros_CarroAluguer'
-ALTER TABLE [dbo].[Carros_CarroAluguer]
-ADD CONSTRAINT [FK_CarroAluguer_inherits_Carro]
+-- Creating foreign key on [IdCarro] in table 'Carros_CarroVenda'
+ALTER TABLE [dbo].[Carros_CarroVenda]
+ADD CONSTRAINT [FK_CarroVenda_inherits_Carro]
     FOREIGN KEY ([IdCarro])
     REFERENCES [dbo].[Carros]
         ([IdCarro])

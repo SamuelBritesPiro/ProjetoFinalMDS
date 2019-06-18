@@ -62,17 +62,17 @@
           <ScalarProperty Name="ClienteIdCliente" ColumnName="ClienteIdCliente" />
         </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(oficinaDB.CarroVenda)">
-        <MappingFragment StoreEntitySet="Carros_CarroVenda">
-          <ScalarProperty Name="IdCarro" ColumnName="IdCarro" />
-          <ScalarProperty Name="Extras" ColumnName="Extras" />
-        </MappingFragment>
-      </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(oficinaDB.CarroAluguer)">
         <MappingFragment StoreEntitySet="Carros_CarroAluguer">
           <ScalarProperty Name="IdCarro" ColumnName="IdCarro" />
           <ScalarProperty Name="Estado" ColumnName="Estado" />
           <ScalarProperty Name="Matricula" ColumnName="Matricula" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(oficinaDB.CarroVenda)">
+        <MappingFragment StoreEntitySet="Carros_CarroVenda">
+          <ScalarProperty Name="IdCarro" ColumnName="IdCarro" />
+          <ScalarProperty Name="Extras" ColumnName="Extras" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -89,13 +89,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="CarroVendaVenda" TypeName="oficinaDB.CarroVendaVenda" StoreEntitySet="Carros_CarroVenda">
+    <AssociationSetMapping Name="VendaCarroVenda" TypeName="oficinaDB.VendaCarroVenda" StoreEntitySet="Carros_CarroVenda">
       <EndProperty Name="Venda">
         <ScalarProperty Name="IdVenda" ColumnName="Venda_IdVenda" />
       </EndProperty>
       <EndProperty Name="CarroVenda">
         <ScalarProperty Name="IdCarro" ColumnName="IdCarro" />
       </EndProperty>
+      <Condition ColumnName="Venda_IdVenda" IsNull="false" />
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>
